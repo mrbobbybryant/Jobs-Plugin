@@ -28,6 +28,9 @@ if ( is_object($screen) && 'job' == $screen->post_type )
 
 	wp_enqueue_script( 'jquery-ui-sortable' );
 	wp_enqueue_script( 'reorder-js', plugins_url( '/js/reorder.js', __FILE__), array('jquery'), '', true );
+	wp_enqueue_script('jquery-ui-datepicker');
+  	wp_enqueue_script( 'field-date-js', plugins_url('js/Field_Date.js', __FILE__), array('jquery-core', 'jquery-ui-core', 'jquery-ui-datepicker'), '', true );
+  
 
 }
 add_action( 'admin_enqueue_scripts', 'hrm_jobs_enqueue_scripts' );
@@ -39,14 +42,6 @@ require_once 'jobs-cpt.php';
 require_once 'jobs-fields.php';
 require_once 'render-admin.php';
 
-/**
- * Initialize the CMB
- */
-if ( file_exists(  __DIR__ .'/cmb2/init.php' ) ) {
-	require_once  __DIR__ .'/cmb2/init.php';
-} elseif ( file_exists(  __DIR__ .'/CMB2/init.php' ) ) {
-	require_once  __DIR__ .'/CMB2/init.php';
-}
 /**
  * Create Sorting Admin Page
  */
