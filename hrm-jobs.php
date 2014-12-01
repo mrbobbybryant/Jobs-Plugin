@@ -46,7 +46,14 @@ require_once 'render-admin.php';
  * Create Sorting Admin Page
  */
 function hrm_jobs_add_menu_page() {
-	add_submenu_page( 'edit.php?post_type=job', 'Reorder Jobs', 'Reorder Jobs', 'edit_pages', 'reorder_jobs', 'hrm_jobs_render_admin' );
+	add_submenu_page( 
+		'edit.php?post_type=job', 
+		'Reorder Jobs', 
+		'Reorder Jobs', 
+		'edit_pages', 
+		'reorder_jobs', 
+		'hrm_jobs_render_admin' 
+	);
 }
 
 /**
