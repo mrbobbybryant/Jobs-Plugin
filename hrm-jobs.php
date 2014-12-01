@@ -22,16 +22,16 @@ function hrm_jobs_enqueue_scripts() {
 
 $screen = get_current_screen();
 
-if ( is_object($screen) && 'job' == $screen->post_type )
+if ( is_object($screen) && 'job' == $screen->post_type ) {
 
 	wp_enqueue_style( 'jobs-admin', plugins_url( '/css/jobs-admin.css', __FILE__) );
 
 	wp_enqueue_script( 'jquery-ui-sortable' );
 	wp_enqueue_script( 'reorder-js', plugins_url( '/js/reorder.js', __FILE__), array('jquery'), '', true );
-	wp_enqueue_script('jquery-ui-datepicker');
+	wp_enqueue_script( 'jquery-ui-datepicker' );
   	wp_enqueue_script( 'field-date-js', plugins_url('js/Field_Date.js', __FILE__), array('jquery-core', 'jquery-ui-core', 'jquery-ui-datepicker'), '', true );
   
-
+  }
 }
 add_action( 'admin_enqueue_scripts', 'hrm_jobs_enqueue_scripts' );
 
