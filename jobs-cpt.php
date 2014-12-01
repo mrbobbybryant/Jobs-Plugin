@@ -1,6 +1,6 @@
 <?php
 function hrm_jobs_posttype() {
-    
+
     $labels = array(
         'name'               => 'Jobs',
         'singular_name'      => 'Job',
@@ -17,7 +17,7 @@ function hrm_jobs_posttype() {
         'not_found'          => 'No jobs found.',
         'not_found_in_trash' => 'No jobs found in Trash.',
     );
-    
+
     $args = array(
         'labels'             => $labels,
         'public'             => true,
@@ -45,7 +45,7 @@ function hrm_jobs_my_rewrite_flush() {
 register_activation_hook( __FILE__, 'hrm_jobs_my_rewrite_flush' );
 
 function hrm_location_tax() {
-    
+
     $labels = array(
             'name'                       => _x( 'Locations', 'taxonomy general name' ),
             'singular_name'              => _x( 'Location', 'taxonomy singular name' ),
