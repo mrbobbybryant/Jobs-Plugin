@@ -52,7 +52,7 @@ function hrm_meta_callback( $post ) {
           <div  class="meta-editor">
             <?php
 
-              $content = '';
+              $content = get_post_meta( $post->ID, 'principle_duties', true );
               $editor_id = 'principle_duties';
               $settings = array( 
                 'textarea_rows' => 5,
