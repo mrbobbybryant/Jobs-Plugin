@@ -69,10 +69,10 @@ function hrm_jobs_list_shortcode ( $atts, $content = null ) {
 		'no_found_rows' => true, /* don't generate a count as part of query */
 	);
 
-	$jobs = new WP_Query( $args );
+	$shortcode_jobs = hrm_get_jobs_posts();
 	?>
 
-	<?php   if ( $jobs->have_posts() ) : ?>
+	<?php   if ( $shortcode_jobs->have_posts() ) : ?>
 
 			<table id="job-list">
 				<tr>
@@ -80,7 +80,7 @@ function hrm_jobs_list_shortcode ( $atts, $content = null ) {
 					<th>Location</th>
 					<th></th>
 				</tr>
-				<?php while ( $jobs->have_posts() ) : $jobs->the_post(); ?>
+				<?php while ( $shortcode_jobs->have_posts() ) : $shortcode_jobs->the_post(); ?>
 
 					<?php $jobUrl = get_permalink(); ?>
 
@@ -103,5 +103,23 @@ function hrm_jobs_list_shortcode ( $atts, $content = null ) {
 }
 
 add_shortcode ( 'hrm_job_list', 'hrm_jobs_list_shortcode');
+
+/**
+* Set Jobs WP_Query
+**/
+
+function hrm_get_jobs_posts() {
+	$args = array(
+		'post_type' => 'job',
+		'orderby' => 'menu_order',
+		'order' => 'ASC',
+		'post_per_page' => 100, /* add a reasonable max # rows */
+		'no_found_rows' => true, /* don't generate a count as part of query */
+	);
+
+	$jobs = new WP_Query( $args );
+
+	return $jobs;
+}
 
 
