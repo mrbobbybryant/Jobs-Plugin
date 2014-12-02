@@ -24,8 +24,9 @@ jQuery(document).ready(function($) {
 						return;
 					},
 					error: function(xhr,textStatus,e) {
+						$( 'div#message' ).remove();
 						$( '#loading-animation' ).hide(); // Hide the loading animation
-						$( 'div#jobs-admin-sort h2:first' ).after( '<div id="message" class="error below-h2"><p>There was an error saving the sort order. Please try again later.</p></div>' );
+						$( 'div#jobs-admin-sort h2:first' ).after( '<div id="message" class="error below-h2"><p>There was an error saving the sort order, or you do not have proper permissions.</p></div>' );
 						return;
 					}
 				};

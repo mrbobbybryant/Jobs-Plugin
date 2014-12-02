@@ -36,16 +36,18 @@ function hrm_jobs_save_order() {
 
 	//@todo add a nonce here to verify user intent
 	//@todo add a capability check to ensure use caps
-
-	global $wpdb; // WordPress database class
-		$order = explode(',', $_POST['order']);
-		$counter = 0;
-		foreach ($order as $item_id) {
-			$wpdb->update( $wpdb->posts, array( 'menu_order' => $counter ), array( 'ID' => (int) $item_id) );
-			$counter++;
-		}
-		die(1);
-
+	if ( current_user_can( 'manage_options') ) {
+		global $wpdb; // WordPress database class
+			$order = explode(',', $_POST['order']);
+			$counter = 0;
+			foreach ($order as $item_id) {
+				$wpdb->update( $wpdb->posts, array( 'menu_order' => $counter ), array( 'ID' => (int) $item_id) );
+				$counter++;
+			}
+			die(1);
+	} else {
+		echo 'you cannot do this'; exit;
+	}
 }
 
 add_action( 'wp_ajax_save_sort', 'hrm_jobs_save_order' );
