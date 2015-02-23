@@ -144,16 +144,14 @@ add_action( 'save_post', 'hrm_meta_save' );
 /**
  * Change Placeholder text in Default title field.
  */
-function change_default_title( $title ){
+function hrm_change_default_title( $placeholder_title ){
 
     $screen = get_current_screen();
 
-    if ( 'job' == $screen->post_type ){
-        $title = "Enter Job Title Here";
+    if ( $screen->post_type == 'job' ){
+        return $placeholder_title = "Enter Job Title Here";
     }
-
-    return $title;
 }
 
-add_filter( 'enter_title_here', 'change_default_title' );
+add_filter( 'enter_title_here', 'hrm_change_default_title' );
 
