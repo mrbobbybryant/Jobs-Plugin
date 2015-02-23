@@ -1,6 +1,26 @@
 <?php
 
-function hrm_jobs_render_admin() {
+/**
+ * Create Sorting Admin Page
+ */
+function hrm_jobs_add_menu_page() {
+	add_submenu_page(
+		'edit.php?post_type=job',
+		'Reorder Jobs',
+		'Reorder Jobs',
+		'edit_pages',
+		'reorder_jobs',
+		'hrm_jobs_callback'
+	);
+}
+
+
+/**
+ * Settings page callback.
+ */
+function hrm_jobs_callback() {
+	
+	/* Populate settings page with the current job listings */
 	$render_jobs = hrm_get_jobs_posts();
 	?>
 		<div id="jobs-admin-sort" class="wrap">
@@ -28,7 +48,7 @@ function hrm_jobs_save_order() {
 	//@todo add a nonce here to verify user intent
 	//capability check to ensure use caps
 	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_die(__( 'You do not have permission to access this page.' ) );
+		wp_die( __( 'You do not have permission to access this page.' ) );
 	}
 		
 	global $wpdb; // WordPress database class
