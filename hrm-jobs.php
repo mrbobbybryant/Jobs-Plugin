@@ -28,9 +28,9 @@ if ( is_object($screen) && 'job' == $screen->post_type ) {
 
 	wp_enqueue_script( 'jquery-ui-sortable' );
 	wp_enqueue_script( 'reorder-js', plugins_url( '/js/reorder.js', __FILE__), array( 'jquery' ), '', true );
-	wp_enqueue_script( 'quicktags', plugins_url( 'js/fields.js', __FILE__), array( 'quicktags' ), '', true );
+	wp_enqueue_script( 'quicktags-js', plugins_url( '/js/quicktags.js', __FILE__), array( 'quicktags' ), '', true );
 	wp_enqueue_script( 'jquery-ui-datepicker' );
-  	wp_enqueue_script( 'field-date-js', plugins_url('js/fields.js', __FILE__), array( 'jquery-core', 'jquery-ui-core', 'jquery-ui-datepicker' ), '', true );
+  	wp_enqueue_script( 'field-js', plugins_url('js/fields.js', __FILE__), array( 'jquery-core', 'jquery-ui-core', 'jquery-ui-datepicker' ), '', true );
 	wp_enqueue_style( 'jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css' );
   }
 }
