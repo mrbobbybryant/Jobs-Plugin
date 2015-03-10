@@ -50,16 +50,22 @@ function hrm_jobs_save_order() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		wp_die( __( 'You do not have permission to access this page.' ) );
 	}
-		
-	global $wpdb; // WordPress database class
-		$order = explode(',', $_POST['order']);
-		$counter = 0;
-		foreach ($order as $item_id) {
-			$wpdb->update( $wpdb->posts, array( 'menu_order' => $counter ), array( 'ID' => (int) $item_id) );
-			$counter++;
-		}
-		die(1);
-	
+
+	$order   = explode( ',', $_POST['order'] );
+	$counter = 0;
+
+	foreach ( $order as $item_id ) {
+		$post = array(
+			'ID'         => (int) $item_id,
+			'menu_order' => $counter,
+		);
+
+		wp_update_post( $post );
+		$counter ++;
+	}
+
+	die( 1 );
+
 }
 
 add_action( 'wp_ajax_save_sort', 'hrm_jobs_save_order' );
