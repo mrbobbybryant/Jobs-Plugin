@@ -45,7 +45,8 @@ add_action( 'admin_menu', 'hrm_jobs_add_menu_page');
 
 function hrm_jobs_save_order() {
 
-	//@todo add a nonce here to verify user intent
+	//verify user intent
+	check_ajax_referer( 'hrm-reorder-nonce', 'security' ); // this comes from wp_localize_script() in hrm-jobs.php
 	//capability check to ensure use caps
 	if ( ! current_user_can( 'manage_options' ) ) {
 		wp_die( __( 'You do not have permission to access this page.' ) );
@@ -64,7 +65,7 @@ function hrm_jobs_save_order() {
 		$counter ++;
 	}
 
-	die( 1 );
+	wp_send_json_success();
 
 }
 
