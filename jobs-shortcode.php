@@ -20,7 +20,7 @@ function hrm_jobs_list_shortcode ( $atts, $content = null ) {
 
 				<tr>
 					<td id="<?php the_id(); ?>"><?php the_title(); ?></td>
-					<td><?php the_terms( $post->ID, 'location') ?></td>
+					<td><?php the_terms( get_the_ID(), 'location') ?></td>
 					<td><a href="<?php echo esc_url( $jobUrl ) ?>">Learn More</a></td>
 				</tr>
 
