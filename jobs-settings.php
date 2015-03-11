@@ -45,21 +45,28 @@ add_action( 'admin_menu', 'hrm_jobs_add_menu_page');
 
 function hrm_jobs_save_order() {
 
-	//@todo add a nonce here to verify user intent
+	//verify user intent
+	check_ajax_referer( 'hrm-reorder-nonce', 'security' ); // this comes from wp_localize_script() in hrm-jobs.php
 	//capability check to ensure use caps
 	if ( ! current_user_can( 'manage_options' ) ) {
 		wp_die( __( 'You do not have permission to access this page.' ) );
 	}
-		
-	global $wpdb; // WordPress database class
-		$order = explode(',', $_POST['order']);
-		$counter = 0;
-		foreach ($order as $item_id) {
-			$wpdb->update( $wpdb->posts, array( 'menu_order' => $counter ), array( 'ID' => (int) $item_id) );
-			$counter++;
-		}
-		die(1);
-	
+
+	$order   = explode( ',', $_POST['order'] );
+	$counter = 0;
+
+	foreach ( $order as $item_id ) {
+		$post = array(
+			'ID'         => (int) $item_id,
+			'menu_order' => $counter,
+		);
+
+		wp_update_post( $post );
+		$counter ++;
+	}
+
+	wp_send_json_success();
+
 }
 
 add_action( 'wp_ajax_save_sort', 'hrm_jobs_save_order' );
